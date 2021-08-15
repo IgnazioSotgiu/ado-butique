@@ -24,8 +24,8 @@ def checkout(request):
             'country': request.POST['country'],
             'postcode': request.POST['postcode'],
             'town_or_city': request.POST['town_or_city'],
-            'city_address1': request.POST['city_address1'],
-            'city_address2': request.POST['city_address2'],
+            'street_address1': request.POST['street_address1'],
+            'street_address2': request.POST['street_address2'],
             'county': request.POST['county'],
         }
         order_form = OrderForm(form_data)
@@ -57,7 +57,7 @@ def checkout(request):
                     )
                     order.delete()
                     return redirect(reverse('view_bag'))
-            request.session['save_info'] = 'save_info' in request.post
+            request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse(
                 'checkout_success', args=[order.order_number]))
         else:
